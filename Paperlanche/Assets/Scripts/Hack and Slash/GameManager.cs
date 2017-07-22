@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
 	//UI Variables
-	public Image GameOverText;
+	public GameObject GameOverText;
 	public Text scoreText;
 	public Text HighScoreText;
 
@@ -19,7 +19,6 @@ public class GameManager : MonoBehaviour
 	private float originalScrollSpeed;
 	public float increaseRate;
 	public float increaseFrequency;
-	public Animator PaperlanchAnim;
 	private float CurrentScore;
 	private int TopScore;
 	private bool canScore = false;
@@ -47,8 +46,12 @@ public class GameManager : MonoBehaviour
 		if (canScore)
 			scorePoints ();
 
-		if (Input.GetKeyDown (KeyCode.P) && !canScore) {
+		if (Input.GetKeyDown (KeyCode.R) && !canScore) {
 			Reset ();
+		}
+
+		if (Input.GetKeyDown (KeyCode.Escape)) {
+			Application.Quit ();
 		}
 	}
 
@@ -63,7 +66,7 @@ public class GameManager : MonoBehaviour
 	public void GameOver ()
 	{
 		canScore = false;
-		GameOverText.enabled = true;
+		GameOverText.SetActive (true);
 		Debug.Log ("Your Score " + getScore ());
 		Debug.Log ("Top Score " + getTopScore ());
 		Invoke ("DestroyPlayer", 1);
@@ -112,11 +115,12 @@ public class GameManager : MonoBehaviour
 		}
 		if (HighScoreText == null) {
 			HighScoreText = GameObject.FindGameObjectWithTag ("Highscore").GetComponent<Text> ();
-			HighScoreText.text = "High Score " + TopScore.ToString ();
+
 		}
 		if (GameOverText == null) {
-			GameOverText = GameObject.FindGameObjectWithTag ("GameOver").GetComponent<Image> ();
-			GameOverText.enabled = false;
+			GameOverText = GameObject.FindGameObjectWithTag ("GameOver");
 		}
+		HighScoreText.text = "High Score " + TopScore.ToString ();
+		GameOverText.SetActive (false);
 	}
 }
