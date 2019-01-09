@@ -2,6 +2,8 @@
 
 Paperlanche is an infinite runner created for the 2017 Sunjam, where the theme was *The Elephant In The Room* 
 
+Get it on [itch.io](https://minimaximize.itch.io/paperlanche)
+
 ## Team
 
 [**Julen Goni**][julenPortfolio] - 2D Artist/Animator
